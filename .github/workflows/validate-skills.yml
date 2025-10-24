@@ -1,0 +1,175 @@
+name: Validate Skills
+
+on:
+  pull_request:
+    paths:
+      - 'skills/**'
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - 'skills/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    name: Validate Skill Structure
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install pyyaml
+
+      - name: Validate skill structure
+        run: |
+          python3 << 'EOF'
+          import os
+          import sys
+          import yaml
+          import re
+          from pathlib import Path
+
+          errors = []
+          warnings = []
+
+          skills_dir = Path('skills')
+
+          # Find all skill directories
+          skill_dirs = [d for d in skills_dir.iterdir() if d.is_dir() and not d.name.startswith('.')]
+
+          print(f"🔍 Validating {len(skill_dirs)} skills...")
+          print()
+
+          for skill_dir in skill_dirs:
+              skill_name = skill_dir.name
+              print(f"Checking {skill_name}...")
+
+              # Check for SKILL.md
+              skill_md = skill_dir / 'SKILL.md'
+              if not skill_md.exists():
+                  errors.append(f"❌ {skill_name}: Missing SKILL.md")
+                  continue
+
+              # Read and parse SKILL.md
+              try:
+                  content = skill_md.read_text()
+
+                  # Extract YAML frontmatter
+                  if not content.startswith('---'):
+                      errors.append(f"❌ {skill_name}: SKILL.md must start with YAML frontmatter (---)")
+                      continue
+
+                  parts = content.split('---', 2)
+                  if len(parts) < 3:
+                      errors.append(f"❌ {skill_name}: Invalid YAML frontmatter format")
+                      continue
+
+                  try:
+                      metadata = yaml.safe_load(parts[1])
+                  except yaml.YAMLError as e:
+                      errors.append(f"❌ {skill_name}: Invalid YAML in frontmatter: {e}")
+                      continue
+
+                  # Validate required fields
+                  if 'name' not in metadata:
+                      errors.append(f"❌ {skill_name}: Missing 'name' in frontmatter")
+
+                  if 'description' not in metadata:
+                      errors.append(f"❌ {skill_name}: Missing 'description' in frontmatter")
+                  elif len(metadata['description']) < 20:
+                      warnings.append(f"⚠️  {skill_name}: Description is very short (< 20 chars)")
+
+                  # Check for allowed-tools (optional but recommended)
+                  if 'allowed-tools' not in metadata:
+                      warnings.append(f"⚠️  {skill_name}: No 'allowed-tools' specified")
+                  else:
+                      # Validate allowed-tools format
+                      tools = metadata['allowed-tools']
+                      if isinstance(tools, str):
+                          warnings.append(f"⚠️  {skill_name}: allowed-tools should be a list, not a string")
+                      elif not isinstance(tools, list):
+                          errors.append(f"❌ {skill_name}: allowed-tools must be a list")
+
+                  # Check for valid tool names
+                  if 'allowed-tools' in metadata and isinstance(metadata['allowed-tools'], list):
+                      valid_tools = ['Bash', 'Read', 'Write', 'Edit', 'API', 'MCP', 'Webhook']
+                      for tool in metadata['allowed-tools']:
+                          if tool not in valid_tools:
+                              warnings.append(f"⚠️  {skill_name}: Unknown tool '{tool}' (valid: {', '.join(valid_tools)})")
+
+                  # Check for content sections
+                  body = parts[2]
+                  if '## When to Use' not in body and '## When To Use' not in body:
+                      warnings.append(f"⚠️  {skill_name}: Missing 'When to Use' section")
+
+                  if '## Example' not in body and '## Examples' not in body:
+                      warnings.append(f"⚠️  {skill_name}: Missing 'Examples' section")
+
+                  print(f"  ✓ Valid SKILL.md")
+
+              except Exception as e:
+                  errors.append(f"❌ {skill_name}: Error reading SKILL.md: {e}")
+                  continue
+
+              # Check for ZIP file
+              zip_file = skill_dir / f"{skill_name}-skill.zip"
+              if not zip_file.exists():
+                  errors.append(f"❌ {skill_name}: Missing {skill_name}-skill.zip")
+              else:
+                  print(f"  ✓ ZIP file exists")
+
+              # Check directory naming convention
+              if not re.match(r'^[a-z0-9-]+$', skill_name):
+                  warnings.append(f"⚠️  {skill_name}: Directory name should be lowercase with hyphens only")
+
+              print()
+
+          # Print summary
+          print("=" * 60)
+          print("VALIDATION SUMMARY")
+          print("=" * 60)
+          print()
+
+          if errors:
+              print(f"❌ {len(errors)} ERROR(S) FOUND:")
+              for error in errors:
+                  print(f"  {error}")
+              print()
+
+          if warnings:
+              print(f"⚠️  {len(warnings)} WARNING(S):")
+              for warning in warnings:
+                  print(f"  {warning}")
+              print()
+
+          if not errors and not warnings:
+              print("✅ All skills passed validation!")
+              print()
+
+          # Exit with error if there are any errors
+          if errors:
+              sys.exit(1)
+
+          print("✅ Validation complete!")
+          EOF
+
+      - name: Check for README in skills directory
+        run: |
+          if [ ! -f skills/README.md ]; then
+            echo "⚠️  Warning: skills/README.md not found"
+          else
+            echo "✅ skills/README.md exists"
+          fi
+
+      - name: Validation complete
+        run: |
+          echo "🎉 All validations passed!"
