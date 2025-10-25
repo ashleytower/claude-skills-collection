@@ -1,7 +1,10 @@
 ---
 name: Notion Template Processor
 description: Fills Notion database templates with data and delivers via email using Notion MCP integration
-allowed-tools: [MCP, API, Bash]
+allowed-tools:
+  - MCP
+  - API
+  - Bash
 ---
 
 # Notion Template Processor

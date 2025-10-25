@@ -1,159 +1,210 @@
-# Claude Skills Directory - Organized & Labeled
+# Claude Skills Directory
 
-This directory contains Claude skills organized by origin and functionality.
+This directory contains all Claude skills, organized and ready for use across Claude Code, Claude Desktop, and AI agents built with the Claude SDK.
 
-## 🎯 **Skill Categories**
+## 📁 Directory Structure
 
-### **🔧 Technical Implementation Skills** (Local Development)
-Skills that provide technical capabilities and tools:
-
-#### **📁 Algorithmic Art Generation**
-- `algorithmic-art/` - Generate algorithmic art and visualizations
-- *Status*: ✅ Local-developed skill
-
-#### **⚙️ Build & Deployment Tools**
-- `artifacts-builder/` - Build and package artifacts
-- *Status*: ✅ Local-developed skill
-
-#### **🎨 Design & Branding Tools**
-- `brand-guidelines/` - Brand guideline enforcement
-- `canvas-design/` - Canvas-based design tools
-- *Status*: ✅ Local-developed skill
-
-#### **📄 Document Processing**
-- `document-skills/` - PDF, DOCX, PPTX processing tools
-- *Status*: ✅ Local-developed skill
-
-#### **👥 Communication & Collaboration**
-- `internal-comms/` - Internal communication tools
-- *Status*: ✅ Local-developed skill
-
-#### **🔧 Development Infrastructure**
-- `mcp-builder/` - MCP server building tools
-- `skill-creator/` - Automated skill creation system
-- *Status*: ✅ Local-developed skill
-
-#### **🎮 Creative & Interactive**
-- `slack-gif-creator/` - Animated GIF creation for Slack
-- *Status*: ✅ Local-developed skill
-
-#### **🎨 Templates & Themes**
-- `template-skill/` - Skill template system
-- `theme-factory/` - Theme creation and management
-- *Status*: ✅ Local-developed skill
-
-#### **🌐 Web & Application Testing**
-- `webapp-testing/` - Web application testing tools
-- *Status*: ✅ Local-developed skill
-
-#### **🤖 Custom Specialized Skills**
-- `notion-template-processor/` - 💡 **NEW!** Notion MCP integration for template processing + email delivery
-- `test-skill/` - Testing and development skill
-- *Status*: ✅ Factory-generated skills
-
----
-
-### **🎯 Development Methodology Skills** (Official Repository)
-Skills that teach and enforce development best practices:
-
-#### **📚 Available in obra/superpowers Repository**
-
-| Skill | Description | Status |
-|-------|-------------|---------|
-| `brainstorming/` | Structured brainstorming methodology | 🔗 Available online |
-| `commands/` | Command execution and management | 🔗 Available online |
-| `condition-based-waiting/` | Conditional workflow management | 🔗 Available online |
-| `defense-in-depth/` | Security-first development practices | 🔗 Available online |
-| `dispatching-parallel-agents/` | Multi-agent workflow coordination | 🔗 Available online |
-| `executing-plans/` | Plan execution and tracking | 🔗 Available online |
-| `finishing-a-development-branch/` | Branch completion workflows | 🔗 Available online |
-| `receiving-code-review/` | Code review receiving process | 🔗 Available online |
-| `requesting-code-review/` | Code review requesting process | 🔗 Available online |
-| `root-cause-tracing/` | Systematic debugging methodology | 🔗 Available online |
-| `sharing-skills/` | Skill sharing and collaboration | 🔗 Available online |
-| `subagent-driven-development/` | Sub-agent development patterns | 🔗 Available online |
-| `systematic-debugging/` | Structured debugging approach | 🔗 Available online |
-| `test-driven-development/` | TDD methodology and practices | 🔗 Available online |
-| `testing-anti-patterns/` | Common testing pitfalls | 🔗 Available online |
-| `testing-skills-with-subagents/` | Sub-agent testing strategies | 🔗 Available online |
-| `using-git-worktrees/` | Git worktree best practices | 🔗 Available online |
-| `using-superpowers/` | Superpowers framework usage | 🔗 Available online |
-| `verification-before-completion/` | Pre-completion verification | 🔗 Available online |
-| `writing-plans/` | Plan writing methodology | 🔗 Available online |
-| `writing-skills/` | Skill writing best practices | 🔗 Available online |
-
-**To import methodology skills:**
-```bash
-cd claude-code-skills-factory/scripts
-python import_skill.py https://github.com/obra/superpowers.git --skill-dir brainstorming
-# This would create: skills/brainstorming-official/
+Each skill follows this structure:
+```
+skills/
+└── skill-name/
+    ├── SKILL.md                    # Main skill definition (required)
+    ├── skill-name-skill.zip        # Claude Desktop package (required)
+    ├── README.md                   # Additional documentation (optional)
+    ├── sample_prompt.md            # Example prompts (optional)
+    ├── scripts/                    # Supporting Python scripts (optional)
+    ├── data/                       # Sample data or configs (optional)
+    └── templates/                  # Templates for the skill (optional)
 ```
 
----
+## 🎯 Available Skills (8 Total)
 
-## 🏷️ **Skill Labeling System**
+### 🧠 Brainstorming
+**Directory:** `brainstorming/`
+**Description:** Transform rough ideas into fully-formed designs through structured Socratic questioning and iterative refinement.
+**Tools:** Context-based (no tools specified)
+**Origin:** Imported from obra/superpowers
+**ZIP:** `brainstorming-skill.zip`
 
-### **Local Skills** (Technical Implementation)
-- ✅ **No suffix** - Core development skills
-- 🔧 **Technical focus** - Code execution, file processing, APIs
+### 🎨 Brand Guidelines
+**Directory:** `brand-guidelines/`
+**Description:** Apply consistent corporate branding and styling to all generated documents including colors, fonts, layouts, and messaging.
+**Tools:** Read, Write, Edit
+**Origin:** Local development
+**ZIP:** `brand-guidelines-skill.zip`
 
-### **Repository Skills** (Official Methodology)
-- 📚 **"-methodology" or "-official" suffix** - Development process skills
-- 🎯 **Methodology focus** - Best practices, workflows, patterns
+### ✍️ Content Research Writer
+**Directory:** `content-research-writer/`
+**Description:** Assists in writing high-quality content by conducting research, adding citations, improving hooks, and providing real-time feedback.
+**Tools:** Context-based (no tools specified)
+**Origin:** Imported from community
+**ZIP:** `content-research-writer-skill.zip`
 
-### **Factory Skills** (Generated)
-- 🚀 **"-processor", "-automation", etc. suffix** - Custom generated skills
-- 🤖 **Integration focus** - MCP integrations, multi-tool workflows
+### 📧 Gmail Intelligence
+**Directory:** `gmail-intelligence/`
+**Description:** Analyze and extract insights from Gmail data, process email threads, and automate email-based workflows.
+**Tools:** API, MCP
+**Origin:** Local development
+**ZIP:** `gmail-intelligence-skill.zip`
+**Additional Files:** README.md, sample_prompt.md
 
----
+### 📑 Invoice Organizer
+**Directory:** `invoice-organizer/`
+**Description:** Automatically organize invoices and receipts for tax preparation by reading messy files, extracting key information, and creating organized structure.
+**Tools:** Bash, Read, Write, Edit
+**Origin:** Local development
+**ZIP:** `invoice-organizer-skill.zip`
 
-## 📦 **ZIP Files for Claude Desktop**
+### 📋 Notion Template Processor
+**Directory:** `notion-template-processor/`
+**Description:** Fill Notion database templates with data and deliver via email using Notion MCP integration.
+**Tools:** MCP, API, Bash
+**Origin:** Factory-generated
+**ZIP:** `notion-template-processor-skill.zip`
+**Additional Files:** sample_prompt.md, scripts/, data/, templates/
 
-**Available for import:**
-- `notion-template-processor/notion-template-processor-skill.zip` - 💡 **NEW!** Complete template automation
-- `test-skill/test-skill-skill.zip` - Factory-generated test skill
+### 📄 PDF Processor
+**Directory:** `pdf-processor/`
+**Description:** Comprehensive PDF manipulation toolkit for extracting text and tables, creating new PDFs, merging/splitting documents, and handling forms.
+**Tools:** Bash, Read, Write, Edit
+**Origin:** Local development
+**ZIP:** `pdf-processor-skill.zip`
 
-**Import process:**
+### 🎥 YouTube Transcript Downloader
+**Directory:** `youtube-transcript-downloader/`
+**Description:** Download YouTube video transcripts using yt-dlp, with Whisper transcription fallback if no subtitles are available.
+**Tools:** Bash, Read, Write
+**Origin:** Local development
+**ZIP:** `youtube-transcript-downloader-skill.zip`
+
+## 📊 Skills by Category
+
+### Document Processing
+- **Brand Guidelines** - Corporate branding automation
+- **Invoice Organizer** - Financial document organization
+- **PDF Processor** - Comprehensive PDF manipulation
+
+### Content & Research
+- **Content Research Writer** - Research and citation management
+- **YouTube Transcript Downloader** - Video transcript extraction
+
+### Integration & Automation
+- **Gmail Intelligence** - Email analysis and automation
+- **Notion Template Processor** - Template filling and delivery
+
+### Methodology & Process
+- **Brainstorming** - Structured idea development
+
+## 📦 Using Skills
+
+### In Claude Code
+
+Skills in this directory are automatically available. Reference them in conversations:
+
+```
+Hey Claude, use the pdf-processor skill to extract text from document.pdf
+```
+
+### In Claude Desktop
+
+Import the ZIP file for any skill:
+
 1. Open Claude Desktop
 2. Profile → Skills → Import Skill
-3. Select ZIP file from skills directory
+3. Select `skills/{skill-name}/{skill-name}-skill.zip`
+
+### With Claude API/SDK
+
+Load skills programmatically:
+
+```python
+from anthropic import Anthropic
+
+# Load a skill
+with open('skills/pdf-processor/SKILL.md', 'r') as f:
+    skill_content = f.read()
+
+# Use in your application
+client = Anthropic(api_key="your-api-key")
+response = client.messages.create(
+    model="claude-3-5-sonnet-20241022",
+    max_tokens=4096,
+    system=f"{skill_content}\n\nUse this skill to complete the task.",
+    messages=[{"role": "user", "content": "Your request here"}]
+)
+```
+
+## ⚡ Quick Reference
+
+### Tool Permissions by Skill
+
+| Skill | Bash | Read | Write | Edit | API | MCP |
+|-------|------|------|-------|------|-----|-----|
+| Brainstorming | - | - | - | - | - | - |
+| Brand Guidelines | - | ✓ | ✓ | ✓ | - | - |
+| Content Research Writer | - | - | - | - | - | - |
+| Gmail Intelligence | - | - | - | - | ✓ | ✓ |
+| Invoice Organizer | ✓ | ✓ | ✓ | ✓ | - | - |
+| Notion Template Processor | ✓ | - | - | - | ✓ | ✓ |
+| PDF Processor | ✓ | ✓ | ✓ | ✓ | - | - |
+| YouTube Transcript Downloader | ✓ | ✓ | ✓ | - | - | - |
+
+### Platform Compatibility
+
+| Skill | Claude Code | Claude Desktop | Claude API |
+|-------|-------------|----------------|------------|
+| All Skills | ✓ | ✓ | ✓ |
+
+**Note:** Skills with Bash/Read/Write tools work best in Claude Code. Skills with API/MCP work across all platforms.
+
+## 🛠️ Adding New Skills
+
+See [../CONTRIBUTING.md](../CONTRIBUTING.md) for complete guidelines.
+
+Quick steps:
+1. Create directory: `skills/your-skill-name/`
+2. Add `SKILL.md` with proper frontmatter
+3. Create ZIP: `zip -r your-skill-name-skill.zip SKILL.md`
+4. Test across platforms
+5. Submit PR
+
+## 📚 Skill Standards
+
+All skills in this directory follow these standards:
+
+- ✅ Descriptive directory names (lowercase-with-hyphens)
+- ✅ Required `SKILL.md` with YAML frontmatter
+- ✅ Required `{skill-name}-skill.zip` for Claude Desktop
+- ✅ Standardized metadata format (multi-line YAML lists)
+- ✅ Clear "When to Use" sections
+- ✅ Comprehensive examples and error handling
+- ✅ Minimal tool permissions
+
+## 🔗 Related Documentation
+
+- [Main README](../README.md) - Repository overview
+- [CONTRIBUTING.md](../CONTRIBUTING.md) - Contribution guidelines
+- [USAGE_GUIDE.md](../USAGE_GUIDE.md) - Platform-specific usage
+- [IMPORT_GUIDE.md](../IMPORT_GUIDE.md) - Importing from Git repos
+
+## 📈 Statistics
+
+- **Total Skills:** 8
+- **With Supporting Scripts:** 1 (Notion Template Processor)
+- **Imported Skills:** 2 (Brainstorming, Content Research Writer)
+- **Local Skills:** 6
+- **Average Lines per SKILL.md:** ~300
+
+## 🎯 Skill Quality Metrics
+
+All skills have been validated for:
+- ✅ Valid YAML frontmatter
+- ✅ Clear purpose and description
+- ✅ Proper tool permissions
+- ✅ Complete documentation
+- ✅ ZIP file for distribution
+- ✅ Cross-platform compatibility
 
 ---
 
-## 🚀 **Adding More Skills**
-
-### **From Official Repository**
-```bash
-# Import methodology skills
-cd claude-code-skills-factory/scripts
-python import_skill.py https://github.com/obra/superpowers.git "brainstorming-methodology"
-python import_skill.py https://github.com/obra/superpowers.git "test-driven-development-official"
-```
-
-### **From Other Repositories**
-```bash
-# Import from any public Git repository
-python import_skill.py "https://github.com/user/awesome-skill.git" "awesome-skill-community"
-```
-
-### **Generate New Skills**
-```bash
-# Use the factory to create new skills
-python init.py "My Custom Skill" "What it does"
-```
-
----
-
-## 📊 **Skill Registry Summary**
-
-| Category | Count | Source | Focus |
-|----------|-------|--------|-------|
-| **Technical Skills** | 12 | Local Development | Code execution, tools, APIs |
-| **Methodology Skills** | 21 | obra/superpowers repo | Best practices, processes |
-| **Factory Skills** | 2 | Generated | Custom integrations |
-
-**Total Skills Available**: **35** skills (12 local + 21 repository + 2 generated)
-
----
-
-*This directory is organized for both immediate use in Claude Code and import to Claude Desktop. Methodology skills provide development best practices, while technical skills offer implementation capabilities.*
+**Need help?** Check the main [README.md](../README.md) or [open an issue](https://github.com/YOUR_USERNAME/claude-skills-collection/issues).
